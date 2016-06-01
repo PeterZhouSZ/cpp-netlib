@@ -36,7 +36,7 @@ struct https_sync_connection
           https_sync_connection<Tag, version_major, version_minor> > {
   typedef typename resolver_policy<Tag>::type resolver_base;
   typedef typename resolver_base::resolver_type resolver_type;
-  typedef typename string<Tag>::type string_type;
+  typedef typename std::string string_type;
   typedef std::function<typename resolver_base::resolver_iterator_pair(
       resolver_type&, string_type const&, string_type const&)>
       resolver_function_type;
@@ -106,13 +106,13 @@ struct https_sync_connection
     ::asio::streambuf request_buffer;
     linearize(
         request_, method, version_major, version_minor,
-        std::ostreambuf_iterator<typename char_<Tag>::type>(&request_buffer));
+        std::ostreambuf_iterator<char>(&request_buffer));
     connection_base::send_request_impl(socket_, method, request_buffer);
     if (generator) {
       string_type chunk;
       while (generator(chunk)) {
         std::copy(chunk.begin(), chunk.end(),
-                  std::ostreambuf_iterator<typename char_<Tag>::type>(
+                  std::ostreambuf_iterator<char>(
                       &request_buffer));
         chunk.clear();
         connection_base::send_request_impl(socket_, method, request_buffer);

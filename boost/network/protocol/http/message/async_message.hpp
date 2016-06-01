@@ -32,7 +32,7 @@ struct ready_wrapper;
 template <class Tag>
 struct async_message {
 
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
   typedef typename headers_container<Tag>::type headers_container_type;
   typedef typename headers_container_type::value_type header_type;
 

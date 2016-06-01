@@ -20,7 +20,7 @@ namespace impl {
 
 template <class Message>
 struct body_wrapper {
-  typedef typename string<typename Message::tag>::type string_type;
+  typedef std::string string_type;
   Message const& message_;
   explicit body_wrapper(Message const& message) : message_(message) {}
   body_wrapper(body_wrapper const& other) : message_(other.message_) {}

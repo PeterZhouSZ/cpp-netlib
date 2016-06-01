@@ -19,7 +19,7 @@ namespace impl {
 template <class Tag>
 struct version_wrapper {
 
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
 
   basic_response<Tag> const& response_;
 

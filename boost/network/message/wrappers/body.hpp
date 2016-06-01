@@ -8,9 +8,8 @@
 #define BOOST_NETWORK_MESSAGE_WRAPPERS_BODY_HPP__
 
 #include <boost/network/detail/wrapper_base.hpp>
-#include <boost/network/traits/string.hpp>
 #include <boost/range/iterator_range.hpp>
-#include <boost/network/message_fwd.hpp>
+#include <boost/network/message.hpp>
 
 namespace boost {
 namespace network {
@@ -25,7 +24,7 @@ namespace impl {
 template <class Tag>
 struct body_wrapper : public detail::wrapper_base<Tag, basic_message<Tag> > {
   typedef basic_message<Tag> message_type;
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
   typedef detail::wrapper_base<Tag, basic_message<Tag> > wrapper_base;
 
   explicit body_wrapper(basic_message<Tag>& message_)
@@ -55,7 +54,7 @@ template <class Tag>
 struct body_wrapper_const
     : public detail::wrapper_base_const<Tag, basic_message<Tag> > {
   typedef basic_message<Tag> message_type;
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
   typedef detail::wrapper_base_const<Tag, basic_message<Tag> > wrapper_base;
 
   explicit body_wrapper_const(basic_message<Tag> const& message_)

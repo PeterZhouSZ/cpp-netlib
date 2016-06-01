@@ -22,7 +22,6 @@
 #include <boost/network/protocol/http/traits/connection_keepalive.hpp>
 #include <boost/network/traits/headers_container.hpp>
 #include <boost/network/traits/ostringstream.hpp>
-#include <boost/network/traits/string.hpp>
 #include <boost/optional.hpp>
 #include <boost/range/algorithm/copy.hpp>
 #include <boost/version.hpp>
@@ -33,7 +32,7 @@ namespace http {
 
 template <class Tag>
 struct linearize_header {
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
 
   template <class Arguments>
   struct result;
@@ -61,7 +60,7 @@ OutputIterator linearize(Request const& request,
                          OutputIterator oi) {
   typedef typename Request::tag Tag;
   typedef constants<Tag> consts;
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
   static string_type http_slash = consts::http_slash(),
                      accept = consts::accept(),
                      accept_mime = consts::default_accept_mime(),

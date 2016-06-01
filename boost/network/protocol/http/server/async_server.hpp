@@ -23,11 +23,11 @@ template <class Tag, class Handler>
 struct async_server_base : server_storage_base, socket_options_base {
   /// The request type for this server.
   typedef basic_request<Tag> request;
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
 
   /// The header type for this server.
   typedef
-      typename boost::network::http::response_header<Tag>::type response_header;
+      typename boost::network::http::response_header response_header;
 
   /// The connection type for this server.
   typedef async_connection<Tag, Handler> connection;

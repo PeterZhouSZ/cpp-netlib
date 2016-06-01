@@ -29,7 +29,7 @@ namespace http {
 template <typename Tag>
 struct message_impl : public basic_message<Tag> {
 
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
 
   /// escapes URL-encoded strings (a%20value+with%20spaces)
   static string_type const url_decode(string_type const &str);

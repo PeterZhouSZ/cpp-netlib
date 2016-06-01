@@ -16,7 +16,6 @@
 #include <boost/network/protocol/http/algorithms/linearize.hpp>
 #include <boost/network/protocol/http/parser/incremental.hpp>
 #include <boost/network/protocol/http/request_parser.hpp>
-#include <boost/network/traits/string.hpp>
 
 namespace boost {
 namespace network {
@@ -26,7 +25,7 @@ namespace impl {
 template <class Tag, unsigned version_major, unsigned version_minor>
 struct http_async_protocol_handler {
  protected:
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
 
 #ifdef BOOST_NETWORK_DEBUG
   struct debug_escaper {
@@ -86,7 +85,7 @@ struct http_async_protocol_handler {
   }
 
   struct to_http_headers {
-    typedef typename string<Tag>::type string_type;
+    typedef std::string string_type;
     template <class U>
     string_type const operator()(U const& pair) const {
       typedef typename ostringstream<Tag>::type ostringstream_type;
@@ -336,7 +335,7 @@ struct http_async_protocol_handler {
 
   typedef response_parser<Tag> response_parser_type;
   // TODO(dberris): make 1024 go away and become a configurable value.
-  typedef std::array<typename char_<Tag>::type, 1024> buffer_type;
+  typedef std::array<char, 1024> buffer_type;
 
   response_parser_type response_parser_;
   std::promise<string_type> version_promise;

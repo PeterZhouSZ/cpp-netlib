@@ -36,7 +36,7 @@
                                                                               \
   template <class Message>                                                    \
   struct name##_wrapper : name##_wrapper_impl<typename Message::tag>::type {  \
-    typedef typename string<typename Message::tag>::type string_type;         \
+    typedef typename std::string string_type;                                 \
     Message const& message_;                                                  \
     name##_wrapper(Message const& message) : message_(message) {}             \
     name##_wrapper(name##_wrapper const& other) : message_(other.message_) {} \

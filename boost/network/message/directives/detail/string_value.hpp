@@ -7,7 +7,6 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 #include <future>
-#include <boost/network/traits/string.hpp>
 #include <boost/network/support/is_async.hpp>
 #include <boost/network/support/is_sync.hpp>
 #include <boost/type_traits/is_same.hpp>
@@ -22,8 +21,7 @@ template <class Tag>
 struct string_value
     : mpl::if_<is_async<Tag>, std::shared_future<typename string<Tag>::type>,
                typename mpl::if_<
-                   mpl::or_<is_sync<Tag>, is_same<Tag, tags::default_string>,
-                            is_same<Tag, tags::default_wstring> >,
+                   mpl::or_<is_sync<Tag>, is_same<Tag, tags::default_string>>,
                    typename string<Tag>::type, unsupported_tag<Tag> >::type> {};
 
 } /* detail */

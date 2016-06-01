@@ -8,25 +8,15 @@
 #ifndef BOOST_NETWORK_TRAITS_HEADERS_CONTAINER_INC
 #define BOOST_NETWORK_TRAITS_HEADERS_CONTAINER_INC
 
-#include <boost/network/tags.hpp>
-#include <boost/network/traits/string.hpp>
 #include <map>
+#include <string>
 
 namespace boost {
 namespace network {
-namespace impl {
-
-template <class Tag, class Enable = void>
-struct headers_container_impl {
-  typedef std::multimap<typename string<Tag>::type, typename string<Tag>::type>
-      type;
-};
-
-}  // namespace impl
-
 template <class Tag>
-struct headers_container : impl::headers_container_impl<Tag> {};
-
+struct headers_container {
+  typedef std::multimap<std::string, std::string> type;
+};
 }  // namespace network
 }  // namespace boost
 

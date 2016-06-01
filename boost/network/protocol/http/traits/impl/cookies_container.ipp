@@ -7,24 +7,18 @@
 #ifndef BOOST_NETWORK_PROTOCOL_HTTP_MESSAGE_TRAITS_COOKIES_CONTAINER_IPP
 #define BOOST_NETWORK_PROTOCOL_HTTP_MESSAGE_TRAITS_COOKIES_CONTAINER_IPP
 
-#include <boost/network/tags.hpp>
-
 #include <map>
+#include <string>
 
 namespace boost {
 namespace network {
 namespace http {
-
 template <class Tag>
 struct cookies_container {
-  typedef std::multimap<typename string<Tag>::type, typename string<Tag>::type>
-      type;
+  typedef std::multimap<std::string, std::string> type;
 };
-
 }  // namespace http
-
 }  // namespace network
-
 }  // namespace boost
 
 #endif  // BOOST_NETWORK_PROTOCOL_HTTP_MESSAGE_TRAITS_COOKIES_CONTAINER_IPP

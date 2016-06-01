@@ -66,7 +66,7 @@ namespace http {
 extern void parse_version(std::string const& partial_parsed,
                           std::tuple<std::uint8_t, std::uint8_t>& version_pair);
 extern void parse_headers(std::string const& input,
-                          std::vector<request_header_narrow>& container);
+                          std::vector<request_header>& container);
 
 template <class Tag, class Handler>
 struct async_connection
@@ -98,7 +98,7 @@ struct async_connection
     space_unavailable = 507
   };
 
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
   typedef basic_request<Tag> request;
 
   /// The connection pointer type.
@@ -237,7 +237,7 @@ struct async_connection
              << consts::space() << status << consts::space()
              << status_message(status) << consts::crlf();
       if (!boost::empty(headers)) {
-        typedef typename string<Tag>::type string_type;
+        typedef std::string string_type;
         boost::transform(headers, std::ostream_iterator<string_type>(stream),
                          linearize_header<Tag>());
       } else {

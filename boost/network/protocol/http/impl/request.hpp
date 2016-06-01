@@ -33,13 +33,6 @@
 
 namespace boost {
 namespace network {
-
-/** Specialize the traits for the http_server tag. */
-template <>
-struct headers_container<http::tags::http_server>
-    : vector<http::tags::http_server>::apply<
-          http::request_header<http::tags::http_server>::type> {};
-
 namespace http {
 
 /**
@@ -56,7 +49,7 @@ struct basic_request : public basic_message<Tag> {
 
  public:
   typedef Tag tag;
-  typedef typename string<tag>::type string_type;
+  typedef std::string string_type;
   typedef std::uint16_t port_type;
 
   explicit basic_request(string_type const& uri_)
@@ -125,9 +118,9 @@ struct basic_request : public basic_message<Tag> {
 template <class Tag>
 struct not_quite_pod_request_base {
   typedef Tag tag;
-  typedef typename string<Tag>::type string_type;
-  typedef typename request_header<Tag>::type header_type;
-  typedef typename vector<Tag>::template apply<header_type>::type vector_type;
+  typedef std::string string_type;
+  typedef request_header header_type;
+  typedef std::vector<header_type> vector_type;
   typedef vector_type headers_container_type;
   typedef std::uint16_t port_type;
   mutable string_type source;
@@ -172,13 +165,13 @@ struct request_headers_wrapper<tags::http_server> {
   explicit request_headers_wrapper(
       basic_request<tags::http_server> const& request_)
       : request_(request_) {}
-  typedef headers_container<tags::http_server>::type headers_container_type;
+  typedef std::vector<http::request_header> headers_container_type;
   operator headers_container_type() { return request_.headers; }
 };
 
 template <>
 struct body_wrapper<basic_request<tags::http_server> > {
-  typedef string<tags::http_server>::type string_type;
+  typedef std::string string_type;
   basic_request<tags::http_server> const& request_;
   explicit body_wrapper(basic_request<tags::http_server> const& request_)
       : request_(request_) {}

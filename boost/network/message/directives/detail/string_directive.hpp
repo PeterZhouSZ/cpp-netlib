@@ -9,7 +9,6 @@
 #include <boost/mpl/if.hpp>
 #include <boost/mpl/or.hpp>
 #include <boost/network/support/is_pod.hpp>
-#include <boost/network/traits/string.hpp>
 #include <boost/utility/enable_if.hpp>
 #include <boost/variant/apply_visitor.hpp>
 #include <boost/variant/static_visitor.hpp>

@@ -93,7 +93,7 @@ struct http_async_connection
     response response_;
     this->init_response(response_, get_body);
     linearize(request, method, version_major, version_minor,
-              std::ostreambuf_iterator<typename char_<Tag>::type>(
+              std::ostreambuf_iterator<char>(
                   &command_streambuf));
     this->method = method;
     std::uint16_t port_ = port(request);
@@ -213,7 +213,7 @@ struct http_async_connection
           // At this point this means we have more data to write, so we write
           // it out.
           std::copy(chunk.begin(), chunk.end(),
-                    std::ostreambuf_iterator<typename char_<Tag>::type>(
+                    std::ostreambuf_iterator<char>(
                         &command_streambuf));
           auto self = this->shared_from_this();
           delegate_->write(

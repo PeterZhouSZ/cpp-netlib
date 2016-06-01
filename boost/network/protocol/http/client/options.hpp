@@ -9,7 +9,6 @@
 
 #include <memory>
 #include <asio/io_service.hpp>
-#include <boost/network/traits/string.hpp>
 #include <boost/optional/optional.hpp>
 
 namespace boost {
@@ -19,7 +18,7 @@ namespace http {
 template <class Tag>
 class client_options {
  public:
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
 
   /// Set all the options to default.
   client_options()

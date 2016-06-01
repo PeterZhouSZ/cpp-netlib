@@ -6,16 +6,10 @@
 // (See accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#include <boost/mpl/if.hpp>
-#include <boost/network/support/is_default_string.hpp>
-#include <boost/network/support/is_default_wstring.hpp>
-
 namespace boost {
 namespace network {
-
-namespace impl {
 template <class Tag>
-struct constants_narrow {
+struct constants {
 
   static char const* crlf() {
     static char crlf_[] = "\r\n";
@@ -109,29 +103,7 @@ struct constants_narrow {
     return https_;
   }
 };
-
-template <class Tag>
-struct constants_wide {
-
-  static wchar_t const* https() {
-    static wchar_t https_[] = L"https";
-    return https_;
-  }
-};
-} // namespace impl
-
-template <class Tag>
-struct unsupported_tag;
-
-template <class Tag>
-struct constants
-    : mpl::if_<
-          is_default_string<Tag>, impl::constants_narrow<Tag>,
-          typename mpl::if_<is_default_wstring<Tag>, impl::constants_wide<Tag>,
-                            unsupported_tag<Tag> >::type>::type {};
-
 }  // namespace network
-
 }  // namespace boost
 
 #endif  // BOOST_NETWORK_CONSTANTS_HPP_20100808

@@ -8,7 +8,6 @@
 #define BOOST_NETWORK_PROTOCOL_HTTP_MESSAGE_TRAITS_CHUNK_CACHE_CONTAINER_IPP
 
 #include <boost/network/protocol/http/tags.hpp>
-#include <boost/network/traits/char.hpp>
 
 #include <list>
 #include <vector>
@@ -19,8 +18,7 @@ namespace http {
 
 template <class Tag>
 struct chunk_cache {
-  // TODO(dberris): define the allocator using an allocator_traits?
-  typedef std::list<std::vector<typename char_<Tag>::type> > type;
+  typedef std::list<std::vector<char>> type;
 };
 
 }  // namespace http

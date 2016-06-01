@@ -35,9 +35,6 @@ struct udp {
 struct default_string {
   typedef mpl::true_::type is_default_string;
 };
-struct default_wstring {
-  typedef mpl::true_::type is_default_wstring;
-};
 
 template <class Tag>
 struct components;

@@ -8,7 +8,6 @@
 // http://www.boost.org/LICENSE_1_0.txt)
 
 #include <boost/network/traits/headers_container.hpp>
-#include <boost/network/traits/string.hpp>
 
 namespace boost {
 namespace network {
@@ -32,7 +31,7 @@ namespace impl {
 
 template <class Tag>
 struct request_headers_wrapper {
-  typedef typename string<Tag>::type string_type;
+  typedef typename std::string string_type;
   typedef typename headers_range<basic_request<Tag> >::type range_type;
   typedef typename headers_container<Tag>::type headers_container_type;
   typedef typename headers_container_type::const_iterator const_iterator;
@@ -67,7 +66,7 @@ struct request_headers_wrapper {
 
 template <class Tag>
 struct response_headers_wrapper {
-  typedef typename string<Tag>::type string_type;
+  typedef typename std::string string_type;
   typedef typename headers_range<basic_response<Tag> >::type range_type;
   typedef typename headers_container<Tag>::type headers_container_type;
   typedef typename headers_container_type::const_iterator const_iterator;

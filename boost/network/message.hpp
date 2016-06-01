@@ -10,7 +10,6 @@
 #include <boost/network/detail/directive_base.hpp>
 #include <boost/network/detail/wrapper_base.hpp>
 #include <boost/network/traits/headers_container.hpp>
-#include <boost/network/traits/string.hpp>
 #include <boost/utility/enable_if.hpp>
 
 /** message.hpp
@@ -33,7 +32,7 @@ struct basic_message {
 
   typedef typename headers_container<Tag>::type headers_container_type;
   typedef typename headers_container_type::value_type header_type;
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
 
   basic_message() = default;
   basic_message(const basic_message&) = default;
@@ -117,8 +116,6 @@ inline void swap(basic_message<Tag>& left, basic_message<Tag>& right) {
 }
 
 typedef basic_message<tags::default_string> message;
-typedef basic_message<tags::default_wstring> wmessage;
-
 }  // namespace network
 }  // namespace boost
 

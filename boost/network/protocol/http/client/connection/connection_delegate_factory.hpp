@@ -9,7 +9,6 @@
 
 #include <boost/network/protocol/http/client/connection/connection_delegate.hpp>
 #include <boost/network/protocol/http/client/connection/normal_delegate.hpp>
-#include <boost/network/traits/string.hpp>
 #include <boost/optional/optional.hpp>
 #include <boost/throw_exception.hpp>
 
@@ -29,7 +28,7 @@ struct normal_delegate;
 template <class Tag>
 struct connection_delegate_factory {
   typedef std::shared_ptr<connection_delegate> connection_delegate_ptr;
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
 
   // This is the factory method that actually returns the delegate instance.
   // TODO(dberris): Support passing in proxy settings when crafting connections.

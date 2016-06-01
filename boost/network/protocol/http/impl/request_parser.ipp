@@ -151,7 +151,7 @@ boost::tribool basic_request_parser<Tag>::consume(basic_request<Tag>& req,
       } else if (!is_char(input) || is_ctl(input) || is_tspecial(input)) {
         return false;
       } else {
-        req.headers.push_back(typename request_header<Tag>::type());
+        req.headers.push_back(request_header());
         req.headers.back().name.push_back(input);
         state_ = header_name;
         return boost::indeterminate;

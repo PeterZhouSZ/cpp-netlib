@@ -29,7 +29,7 @@ struct async_client
   typedef typename connection_policy<Tag, version_major, version_minor>::type
       connection_base;
   typedef typename resolver<Tag>::type resolver_type;
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
 
   typedef std::function<void(boost::iterator_range<char const*> const&,
                              std::error_code const&)>

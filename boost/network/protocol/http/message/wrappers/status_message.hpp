@@ -8,7 +8,6 @@
 // (See accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#include <boost/network/traits/string.hpp>
 #include <sstream>
 
 namespace boost {
@@ -23,7 +22,7 @@ namespace impl {
 template <class Tag>
 struct status_message_wrapper {
 
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
 
   basic_response<Tag> const& response_;
 
@@ -39,7 +38,7 @@ struct status_message_wrapper {
 template <class Tag>
 inline std::ostream& operator<<(std::ostream&  os,
                                 const status_message_wrapper<Tag>&  wrapper) {
-  return os << static_cast<typename string<Tag>::type>(wrapper);
+  return os << static_cast<std::string>(wrapper);
 }
 
 }  // namespace impl

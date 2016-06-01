@@ -24,7 +24,7 @@ namespace http {
 template <class Tag, unsigned version_major, unsigned version_minor>
 struct async_connection_policy : resolver_policy<Tag>::type {
  protected:
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
   typedef typename resolver_policy<Tag>::type resolver_base;
   typedef typename resolver_base::resolver_type resolver_type;
   typedef typename resolver_base::resolve_function resolve_function;

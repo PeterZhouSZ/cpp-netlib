@@ -20,7 +20,6 @@
 #include <boost/network/traits/vector.hpp>
 #include <boost/network/protocol/http/message/header.hpp>
 #include <boost/network/protocol/http/tags.hpp>
-#include <boost/network/traits/string.hpp>
 
 namespace boost {
 namespace network {
@@ -30,7 +29,7 @@ namespace http {
 template <>
 struct basic_response<tags::http_server> {
   typedef tags::http_server tag;
-  typedef response_header<tags::http_server>::type header_type;
+  typedef response_header header_type;
 
   /*! The status of the reply. Represent all the status codes of HTTP v1.1
    * from http://tools.ietf.org/html/rfc2616#page-39 and
@@ -88,11 +87,11 @@ struct basic_response<tags::http_server> {
   } status;
 
   /// The headers to be included in the reply.
-  typedef vector<tags::http_server>::apply<header_type>::type headers_vector;
+  typedef std::vector<header_type> headers_vector;
   headers_vector headers;
 
   /// The content to be sent in the reply.
-  typedef string<tags::http_server>::type string_type;
+  typedef std::string string_type;
   string_type content;
 
   /// Convert the reply into a vector of buffers. The buffers do not own

@@ -13,8 +13,6 @@
 #include <asio/io_service.hpp>
 #include <asio/ssl.hpp>
 #include <boost/network/protocol/http/client/connection/connection_delegate.hpp>
-#include <boost/network/support/is_default_string.hpp>
-#include <boost/network/support/is_default_wstring.hpp>
 #include <boost/optional.hpp>
 
 namespace boost {

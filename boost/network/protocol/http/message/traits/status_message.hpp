@@ -10,7 +10,6 @@
 #include <boost/mpl/if.hpp>
 #include <boost/network/support/is_async.hpp>
 #include <boost/network/tags.hpp>
-#include <boost/network/traits/string.hpp>
 
 namespace boost {
 namespace network {
@@ -28,8 +27,7 @@ struct status_message
           std::shared_future<typename string<typename Message::tag>::type>,
           typename mpl::if_<
               mpl::or_<is_sync<typename Message::tag>,
-                       is_same<typename Message::tag, boost::network::tags::default_string>,
-                       is_same<typename Message::tag, boost::network::tags::default_wstring> >,
+                       is_same<typename Message::tag, boost::network::tags::default_string>>,
               typename string<typename Message::tag>::type,
               unsupported_tag<typename Message::tag> >::type> {};
 

@@ -15,7 +15,6 @@
 #include <boost/network/protocol/http/traits/delegate_factory.hpp>
 #include <boost/network/protocol/http/client/connection/async_normal.hpp>
 #include <boost/network/protocol/http/traits/resolver_policy.hpp>
-#include <boost/network/traits/string.hpp>
 
 namespace boost {
 namespace network {
@@ -28,10 +27,10 @@ struct async_connection_base {
   typedef typename resolver_policy<Tag>::type resolver_base;
   typedef typename resolver_base::resolver_type resolver_type;
   typedef typename resolver_base::resolve_function resolve_function;
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
   typedef basic_request<Tag> request;
   typedef basic_response<Tag> response;
-  typedef typename std::array<typename char_<Tag>::type, 1024>::const_iterator const_iterator;
+  typedef typename std::array<char, 1024>::const_iterator const_iterator;
   typedef iterator_range<const_iterator> char_const_range;
   typedef std::function<void(char_const_range const &, std::error_code const &)>
       body_callback_function_type;

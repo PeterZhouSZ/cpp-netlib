@@ -13,7 +13,6 @@
 #include <asio/placeholders.hpp>
 #include <asio/strand.hpp>
 #include <boost/network/protocol/http/traits/resolver.hpp>
-#include <boost/network/traits/string.hpp>
 #include <boost/algorithm/string/case_conv.hpp>
 
 namespace boost {
@@ -28,7 +27,7 @@ struct async_resolver : std::enable_shared_from_this<async_resolver<Tag> > {
   typedef typename resolver_type::query resolver_query;
   typedef std::pair<resolver_iterator, resolver_iterator>
       resolver_iterator_pair;
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
   typedef std::unordered_map<string_type, resolver_iterator_pair>
       endpoint_cache;
   typedef std::function<void(std::error_code const &, resolver_iterator_pair)>

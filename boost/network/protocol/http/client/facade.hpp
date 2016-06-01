@@ -26,7 +26,7 @@ class basic_client_facade {
    * The type to use for strings associated with this client. Typically resolves
    * to `std::string`.
    */
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
 
   /** The request type. This models the HTTP Request concept. */
   typedef basic_request<Tag> request;
@@ -121,8 +121,7 @@ class basic_client_facade {
       request << header("Content-Type", content_type);
     } else {
       if (boost::empty(content_type_headers)) {
-        typedef typename char_<Tag>::type char_type;
-        static char_type content_type[] = "x-application/octet-stream";
+        static char content_type[] = "x-application/octet-stream";
         request << header("Content-Type", content_type);
       }
     }
@@ -226,8 +225,7 @@ class basic_client_facade {
       request << header("Content-Type", content_type);
     } else {
       if (boost::empty(content_type_headers)) {
-        typedef typename char_<Tag>::type char_type;
-        static char_type content_type[] = "x-application/octet-stream";
+        static char content_type[] = "x-application/octet-stream";
         request << header("Content-Type", content_type);
       }
     }

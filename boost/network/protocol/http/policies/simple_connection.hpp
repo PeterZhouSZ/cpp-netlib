@@ -14,10 +14,8 @@
 #include <boost/network/protocol/http/request.hpp>
 #include <boost/network/protocol/http/tags.hpp>
 #include <boost/network/protocol/http/traits/resolver_policy.hpp>
-#include <boost/network/traits/string.hpp>
 #include <boost/network/version.hpp>
 #include <boost/network/protocol/http/client/connection/sync_base.hpp>
-#include <boost/network/traits/string.hpp>
 #include <boost/optional/optional.hpp>
 
 namespace boost {
@@ -27,7 +25,7 @@ namespace http {
 template <class Tag, unsigned version_major, unsigned version_minor>
 struct simple_connection_policy : resolver_policy<Tag>::type {
  protected:
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
   typedef typename resolver_policy<Tag>::type resolver_base;
   typedef typename resolver_base::resolver_type resolver_type;
   typedef std::function<typename resolver_base::resolver_iterator_pair(

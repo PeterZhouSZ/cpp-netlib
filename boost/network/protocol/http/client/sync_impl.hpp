@@ -13,7 +13,6 @@
 #include <boost/network/protocol/http/request.hpp>
 #include <boost/network/protocol/http/tags.hpp>
 #include <boost/network/protocol/http/traits/connection_policy.hpp>
-#include <boost/network/traits/string.hpp>
 #include <boost/optional/optional.hpp>
 
 namespace boost {
@@ -27,7 +26,7 @@ namespace impl {
 template <class Tag, unsigned version_major, unsigned version_minor>
 struct sync_client
     : connection_policy<Tag, version_major, version_minor>::type {
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
   typedef typename connection_policy<Tag, version_major, version_minor>::type
       connection_base;
   typedef typename resolver<Tag>::type resolver_type;

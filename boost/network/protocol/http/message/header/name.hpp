@@ -18,20 +18,13 @@ T1 &name(std::pair<T1, T2> const &p) {
   return p.first;
 }
 
-inline std::string const &name(request_header_narrow const &h) {
+inline std::string const &name(request_header const &h) {
   return h.name;
 }
 
-inline std::wstring const &name(request_header_wide const &h) { return h.name; }
-
-inline std::string const &name(response_header_narrow const &h) {
+inline std::string const &name(response_header const &h) {
   return h.name;
 }
-
-inline std::wstring const &name(response_header_wide const &h) {
-  return h.name;
-}
-
 }  // namespace http
  /* http */
 

@@ -38,7 +38,7 @@ namespace http {
 template <class Tag>
 struct basic_response : public message_base<Tag>::type {
 
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
 
  private:
   typedef typename message_base<Tag>::type base_type;

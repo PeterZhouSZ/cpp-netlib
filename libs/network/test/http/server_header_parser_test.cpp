@@ -29,7 +29,7 @@ using namespace boost::network::http;
 
 TEST(ServerHeaderParserTest, ParseHeaders) {
   std::wstring utf16_test_name = L"R\u016bdolfs";
-  request_header_narrow utf8_header = {
+  request_header utf8_header = {
       "X-Utf8-Test-Header",
       boost::locale::conv::utf_to_utf<char>(utf16_test_name)};
   std::string valid_http_request;
@@ -37,9 +37,9 @@ TEST(ServerHeaderParserTest, ParseHeaders) {
       .append(": ")
       .append(utf8_header.value)
       .append("\r\n\r\n");
-  std::vector<request_header_narrow> headers;
+  std::vector<request_header> headers;
   parse_headers(valid_http_request, headers);
-  std::vector<request_header_narrow>::iterator header_iterator =
+  std::vector<request_header>::iterator header_iterator =
       headers.begin();
   for (; header_iterator != headers.end(); ++header_iterator) {
     if (header_iterator->name == utf8_header.name &&

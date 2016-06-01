@@ -12,7 +12,6 @@
 #include <asio/io_service.hpp>
 #include <asio/socket_base.hpp>
 #include <boost/network/protocol/stream_handler.hpp>
-#include <boost/network/traits/string.hpp>
 #include <boost/network/utils/thread_pool.hpp>
 #include <boost/optional.hpp>
 
@@ -25,7 +24,7 @@ namespace http {
  */
 template <class Tag, class Handler>
 struct server_options {
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
 
   /// A single-argument constructor that takes a Handler, and sets all options
   /// to defaults.

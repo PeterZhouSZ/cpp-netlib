@@ -11,7 +11,6 @@
 #include <tuple>
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/network/protocol/http/traits/resolver.hpp>
-#include <boost/network/traits/string.hpp>
 
 namespace boost {
 namespace network {
@@ -28,7 +27,7 @@ struct sync_resolver {
       resolver_iterator_pair;
 
  protected:
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
   typedef std::unordered_map<string_type, resolver_iterator_pair>
       resolved_cache;
   resolved_cache endpoint_cache_;

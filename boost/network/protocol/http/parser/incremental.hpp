@@ -13,7 +13,6 @@
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/logic/tribool.hpp>
 #include <boost/network/tags.hpp>
-#include <boost/network/traits/string.hpp>
 #include <boost/range.hpp>
 #include <utility>
 

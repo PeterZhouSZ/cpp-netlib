@@ -43,7 +43,7 @@ void parse_version(
 }
 
 void parse_headers(
-    std::string const& input, std::vector<request_header_narrow>& container) {
+    std::string const& input, std::vector<request_header>& container) {
   using namespace boost::spirit::qi;
   u8_to_u32_iterator<std::string::const_iterator> begin = input.begin(),
                                                   end = input.end();

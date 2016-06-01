@@ -32,7 +32,7 @@ struct sync_connection_base_impl {
  protected:
   typedef typename resolver_policy<Tag>::type resolver_base;
   typedef typename resolver_base::resolver_type resolver_type;
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
   typedef std::function<typename resolver_base::resolver_iterator_pair(
       resolver_type&, string_type const&, string_type const&)>
       resolver_function_type;
@@ -235,7 +235,7 @@ template <class Tag, unsigned version_major, unsigned version_minor>
 struct sync_connection_base {
   typedef typename resolver_policy<Tag>::type resolver_base;
   typedef typename resolver_base::resolver_type resolver_type;
-  typedef typename string<Tag>::type string_type;
+  typedef std::string string_type;
   typedef std::function<typename resolver_base::resolver_iterator_pair(
       resolver_type&, string_type const&, string_type const&)>
       resolver_function_type;
