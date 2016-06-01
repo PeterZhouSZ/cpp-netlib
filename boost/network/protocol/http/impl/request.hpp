@@ -83,8 +83,7 @@ struct basic_request : public basic_message<Tag> {
       return uri_.port<std::uint16_t>();
     }
     else {
-      typedef constants<Tag> consts;
-      return boost::iequals(uri_.scheme(), string_type(consts::https())) ? 443 : 80;
+      return boost::iequals(uri_.scheme(), string_type(constants::https())) ? 443 : 80;
     }
   }
 

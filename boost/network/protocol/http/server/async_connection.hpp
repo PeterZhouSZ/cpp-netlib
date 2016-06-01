@@ -230,20 +230,19 @@ struct async_connection
     if (error_encountered)
       boost::throw_exception(std::system_error(*error_encountered));
 
-    typedef constants<Tag> consts;
     {
       std::ostream stream(&headers_buffer);
-      stream << consts::http_slash() << 1 << consts::dot() << 1
-             << consts::space() << status << consts::space()
-             << status_message(status) << consts::crlf();
+      stream << constants::http_slash() << 1 << constants::dot() << 1
+             << constants::space() << status << constants::space()
+             << status_message(status) << constants::crlf();
       if (!boost::empty(headers)) {
         typedef std::string string_type;
         boost::transform(headers, std::ostream_iterator<string_type>(stream),
                          linearize_header<Tag>());
       } else {
-        stream << consts::crlf();
+        stream << constants::crlf();
       }
-      stream << consts::crlf();
+      stream << constants::crlf();
     }
 
     auto self = this->shared_from_this();

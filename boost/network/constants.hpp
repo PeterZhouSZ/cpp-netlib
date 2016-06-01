@@ -8,7 +8,6 @@
 
 namespace boost {
 namespace network {
-template <class Tag>
 struct constants {
 
   static char const* crlf() {

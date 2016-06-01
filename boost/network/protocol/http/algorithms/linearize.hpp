@@ -43,10 +43,9 @@ struct linearize_header {
   template <class ValueType>
   string_type operator()(ValueType& header) {
     typedef std::ostringstream output_stream;
-    typedef constants<Tag> consts;
     output_stream header_line;
-    header_line << name(header) << consts::colon() << consts::space()
-                << value(header) << consts::crlf();
+    header_line << name(header) << constants::colon() << constants::space()
+                << value(header) << constants::crlf();
     return header_line.str();
   }
 };
@@ -57,36 +56,35 @@ OutputIterator linearize(Request const& request,
                          unsigned version_major, unsigned version_minor,
                          OutputIterator oi) {
   typedef typename Request::tag Tag;
-  typedef constants<Tag> consts;
   typedef std::string string_type;
-  static string_type http_slash = consts::http_slash(),
-                     accept = consts::accept(),
-                     accept_mime = consts::default_accept_mime(),
-                     accept_encoding = consts::accept_encoding(),
+  static string_type http_slash = constants::http_slash(),
+                     accept = constants::accept(),
+                     accept_mime = constants::default_accept_mime(),
+                     accept_encoding = constants::accept_encoding(),
                      default_accept_encoding =
-                         consts::default_accept_encoding(),
-                     crlf = consts::crlf(), host = consts::host(),
-                     connection = consts::connection(), close = consts::close();
+                         constants::default_accept_encoding(),
+                     crlf = constants::crlf(), host = constants::host(),
+                     connection = constants::connection(), close = constants::close();
   boost::copy(method, oi);
-  *oi = consts::space_char();
-  if (request.path().empty() || request.path()[0] != consts::slash_char()) {
-    *oi = consts::slash_char();
+  *oi = constants::space_char();
+  if (request.path().empty() || request.path()[0] != constants::slash_char()) {
+    *oi = constants::slash_char();
   }
   boost::copy(request.path(), oi);
   if (!request.query().empty()) {
-    *oi = consts::question_mark_char();
+    *oi = constants::question_mark_char();
     boost::copy(request.query(), oi);
   }
   if (!request.anchor().empty()) {
-    *oi = consts::hash_char();
+    *oi = constants::hash_char();
     boost::copy(request.anchor(), oi);
   }
-  *oi = consts::space_char();
+  *oi = constants::space_char();
   boost::copy(http_slash, oi);
   string_type version_major_str = std::to_string(version_major),
               version_minor_str = std::to_string(version_minor);
   boost::copy(version_major_str, oi);
-  *oi = consts::dot_char();
+  *oi = constants::dot_char();
   boost::copy(version_minor_str, oi);
   boost::copy(crlf, oi);
 
@@ -96,12 +94,12 @@ OutputIterator linearize(Request const& request,
   enum { ACCEPT, ACCEPT_ENCODING, HOST, CONNECTION, MAX };
   std::bitset<MAX> found_headers;
   static char const* defaulted_headers[][2] = {
-      {consts::accept(), consts::accept() + std::strlen(consts::accept())},
-      {consts::accept_encoding(),
-       consts::accept_encoding() + std::strlen(consts::accept_encoding())},
-      {consts::host(), consts::host() + std::strlen(consts::host())},
-      {consts::connection(),
-       consts::connection() + std::strlen(consts::connection())}};
+      {constants::accept(), constants::accept() + std::strlen(constants::accept())},
+      {constants::accept_encoding(),
+       constants::accept_encoding() + std::strlen(constants::accept_encoding())},
+      {constants::host(), constants::host() + std::strlen(constants::host())},
+      {constants::connection(),
+       constants::connection() + std::strlen(constants::connection())}};
 
   typedef typename headers_range<Request>::type headers_range;
   typedef typename range_value<headers_range>::type headers_value;
@@ -121,16 +119,16 @@ OutputIterator linearize(Request const& request,
     // We ignore empty headers.
     if (header_value.empty()) continue;
     boost::copy(header_name, oi);
-    *oi = consts::colon_char();
-    *oi = consts::space_char();
+    *oi = constants::colon_char();
+    *oi = constants::space_char();
     boost::copy(header_value, oi);
     boost::copy(crlf, oi);
   }
 
   if (!found_headers[HOST]) {
     boost::copy(host, oi);
-    *oi = consts::colon_char();
-    *oi = consts::space_char();
+    *oi = constants::colon_char();
+    *oi = constants::space_char();
     boost::copy(request.host(), oi);
     boost::optional<std::uint16_t> port_ =
 #if (_MSC_VER >= 1600 && BOOST_VERSION > 105500)
@@ -140,7 +138,7 @@ OutputIterator linearize(Request const& request,
 #endif
     if (port_) {
       string_type port_str = std::to_string(*port_);
-      *oi = consts::colon_char();
+      *oi = constants::colon_char();
       boost::copy(port_str, oi);
     }
     boost::copy(crlf, oi);
@@ -148,8 +146,8 @@ OutputIterator linearize(Request const& request,
 
   if (!found_headers[ACCEPT]) {
     boost::copy(accept, oi);
-    *oi = consts::colon_char();
-    *oi = consts::space_char();
+    *oi = constants::colon_char();
+    *oi = constants::space_char();
     boost::copy(accept_mime, oi);
     boost::copy(crlf, oi);
   }
@@ -157,16 +155,16 @@ OutputIterator linearize(Request const& request,
   if (version_major == 1u && version_minor == 1u &&
       !found_headers[ACCEPT_ENCODING]) {
     boost::copy(accept_encoding, oi);
-    *oi = consts::colon_char();
-    *oi = consts::space_char();
+    *oi = constants::colon_char();
+    *oi = constants::space_char();
     boost::copy(default_accept_encoding, oi);
     boost::copy(crlf, oi);
   }
 
   if (!connection_keepalive<Tag>::value && !found_headers[CONNECTION]) {
     boost::copy(connection, oi);
-    *oi = consts::colon_char();
-    *oi = consts::space_char();
+    *oi = constants::colon_char();
+    *oi = constants::space_char();
     boost::copy(close, oi);
     boost::copy(crlf, oi);
   }

@@ -88,7 +88,6 @@ struct http_async_protocol_handler {
     typedef std::string string_type;
     template <class U>
     string_type const operator()(U const& pair) const {
-      typedef constants<Tag> constants;
       std::ostringstream header_line;
       header_line << pair.first << constants::colon() << constants::space()
                   << pair.second << constants::crlf();
