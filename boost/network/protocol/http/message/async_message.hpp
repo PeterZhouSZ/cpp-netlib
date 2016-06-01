@@ -11,10 +11,10 @@
 
 #include <future>
 #include <cstdint>
-#include <boost/optional.hpp>
-
-// FIXME move this out to a trait
+#include <map>
 #include <set>
+#include <string>
+#include <boost/optional.hpp>
 #include <boost/network/detail/wrapper_base.hpp>
 
 namespace boost {
@@ -33,7 +33,7 @@ template <class Tag>
 struct async_message {
 
   typedef std::string string_type;
-  typedef typename headers_container<Tag>::type headers_container_type;
+  typedef std::multimap<std::string, std::string> headers_container_type;
   typedef typename headers_container_type::value_type header_type;
 
   async_message()

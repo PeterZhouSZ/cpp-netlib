@@ -64,7 +64,7 @@ struct http_async_protocol_handler {
         destination_promise.get_future());
     destination(response_, destination_future);
 
-    std::shared_future<typename headers_container<Tag>::type> headers_future(
+    std::shared_future<std::multimap<string_type, string_type>> headers_future(
         headers_promise.get_future());
     headers(response_, headers_future);
 
@@ -88,9 +88,8 @@ struct http_async_protocol_handler {
     typedef std::string string_type;
     template <class U>
     string_type const operator()(U const& pair) const {
-      typedef typename ostringstream<Tag>::type ostringstream_type;
       typedef constants<Tag> constants;
-      ostringstream_type header_line;
+      std::ostringstream header_line;
       header_line << pair.first << constants::colon() << constants::space()
                   << pair.second << constants::crlf();
       return header_line.str();
@@ -242,7 +241,7 @@ struct http_async_protocol_handler {
     logic::tribool parsed_ok;
     response_parser_type headers_parser(
         response_parser_type::http_header_line_done);
-    typename headers_container<Tag>::type headers;
+    typename std::multimap<string_type, string_type> headers;
     std::pair<string_type, string_type> header_pair;
     while (!boost::empty(input_range)) {
       std::tie(parsed_ok, result_range) = headers_parser.parse_until(
@@ -341,7 +340,7 @@ struct http_async_protocol_handler {
   std::promise<string_type> version_promise;
   std::promise<std::uint16_t> status_promise;
   std::promise<string_type> status_message_promise;
-  std::promise<typename headers_container<Tag>::type> headers_promise;
+  std::promise<std::multimap<string_type, string_type>> headers_promise;
   std::promise<string_type> source_promise;
   std::promise<string_type> destination_promise;
   std::promise<string_type> body_promise;

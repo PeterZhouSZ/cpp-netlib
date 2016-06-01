@@ -7,7 +7,9 @@
 // (See accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#include <boost/network/traits/headers_container.hpp>
+#include <map>
+#include <string>
+#include <boost/range/iterator_range.hpp>
 
 namespace boost {
 namespace network {
@@ -15,10 +17,8 @@ namespace http {
 
 template <class Message>
 struct headers_range {
-  typedef typename headers_container<typename Message::tag>::type
-      headers_container_type;
-  typedef typename boost::iterator_range<
-      typename headers_container_type::const_iterator> type;
+  typedef std::multimap<std::string, std::string> headers_container_type;
+  typedef typename boost::iterator_range<typename headers_container_type::const_iterator> type;
 };
 
 template <class Tag>
@@ -33,7 +33,7 @@ template <class Tag>
 struct request_headers_wrapper {
   typedef typename std::string string_type;
   typedef typename headers_range<basic_request<Tag> >::type range_type;
-  typedef typename headers_container<Tag>::type headers_container_type;
+  typedef typename headers_range<basic_request<Tag> >::headers_container_type headers_container_type;
   typedef typename headers_container_type::const_iterator const_iterator;
   typedef typename headers_container_type::iterator iterator;
 
@@ -66,9 +66,9 @@ struct request_headers_wrapper {
 
 template <class Tag>
 struct response_headers_wrapper {
-  typedef typename std::string string_type;
+  typedef std::string string_type;
   typedef typename headers_range<basic_response<Tag> >::type range_type;
-  typedef typename headers_container<Tag>::type headers_container_type;
+  typedef typename headers_range<basic_response<Tag> >::headers_container_type headers_container_type;
   typedef typename headers_container_type::const_iterator const_iterator;
   typedef typename headers_container_type::iterator iterator;
 

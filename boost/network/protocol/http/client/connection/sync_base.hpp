@@ -13,8 +13,6 @@
 #include <asio/write.hpp>
 #include <asio/read_until.hpp>
 #include <boost/network/protocol/http/traits/resolver_policy.hpp>
-#include <boost/network/traits/istringstream.hpp>
-#include <boost/network/traits/ostringstream.hpp>
 #include <boost/network/protocol/http/response.hpp>
 
 #include <boost/network/protocol/http/client/connection/sync_normal.hpp>
@@ -111,7 +109,7 @@ struct sync_connection_base_impl {
   template <class Socket>
   void read_body_normal(Socket& socket_, basic_response<Tag>& response_,
                         ::asio::streambuf& response_buffer,
-                        typename ostringstream<Tag>::type& body_stream) {
+                        std::ostringstream& body_stream) {
     // TODO(dberris): review parameter necessity.
     (void)response_;
 
@@ -128,7 +126,7 @@ struct sync_connection_base_impl {
   void read_body_transfer_chunk_encoding(
       Socket& socket_, basic_response<Tag>& response_,
       ::asio::streambuf& response_buffer,
-      typename ostringstream<Tag>::type& body_stream) {
+      std::ostringstream& body_stream) {
     std::error_code error;
     // look for the content-length header
     typename headers_range<basic_response<Tag> >::type content_length_range =
@@ -153,7 +151,7 @@ struct sync_connection_base_impl {
           {
             std::istream chunk_stream(&response_buffer);
             std::getline(chunk_stream, data);
-            typename istringstream<Tag>::type chunk_size_stream(data);
+            std::istringstream chunk_size_stream(data);
             chunk_size_stream >> std::hex >> chunk_size;
           }
           if (chunk_size == 0) {
@@ -212,7 +210,7 @@ struct sync_connection_base_impl {
   template <class Socket>
   void read_body(Socket& socket_, basic_response<Tag>& response_,
                  ::asio::streambuf& response_buffer) {
-    typename ostringstream<Tag>::type body_stream;
+    std::ostringstream body_stream;
     // TODO(dberris): tag dispatch based on whether it's HTTP 1.0 or HTTP 1.1
     if (version_major == 1 && version_minor == 0) {
       read_body_normal(socket_, response_, response_buffer, body_stream);

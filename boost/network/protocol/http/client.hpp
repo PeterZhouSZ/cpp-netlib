@@ -6,20 +6,17 @@
 //    (See accompanying file LICENSE_1_0.txt or copy at
 //          http://www.boost.org/LICENSE_1_0.txt)
 
-#include <boost/config.hpp>
-#include <boost/network/protocol/http/message.hpp>
-#include <boost/network/protocol/http/request.hpp>
-#include <boost/network/protocol/http/client/response.hpp>
-#include <boost/network/traits/ostringstream.hpp>
-
-#include <boost/algorithm/string/classification.hpp>
-#include <boost/algorithm/string/split.hpp>
 #include <istream>
 #include <map>
 #include <ostream>
 #include <stdexcept>
 #include <string>
-
+#include <boost/config.hpp>
+#include <boost/network/protocol/http/message.hpp>
+#include <boost/network/protocol/http/request.hpp>
+#include <boost/network/protocol/http/client/response.hpp>
+#include <boost/algorithm/string/classification.hpp>
+#include <boost/algorithm/string/split.hpp>
 #include <boost/network/protocol/http/client/facade.hpp>
 #include <boost/network/protocol/http/client/macros.hpp>
 #include <boost/network/protocol/http/client/options.hpp>

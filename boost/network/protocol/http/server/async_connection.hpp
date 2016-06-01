@@ -462,7 +462,7 @@ struct async_connection
   enum state_t { method, uri, version, headers };
 
   void start() {
-    typename ostringstream<Tag>::type ip_stream;
+    std::ostringstream ip_stream;
     ip_stream << socket_.remote_endpoint().address().to_string() << ':'
               << socket_.remote_endpoint().port();
     request_.source = ip_stream.str();

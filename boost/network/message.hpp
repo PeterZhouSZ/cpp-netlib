@@ -7,9 +7,10 @@
 #ifndef BOOST_NETWORK_MESSAGE_HPP__
 #define BOOST_NETWORK_MESSAGE_HPP__
 
+#include <map>
+#include <string>
 #include <boost/network/detail/directive_base.hpp>
 #include <boost/network/detail/wrapper_base.hpp>
-#include <boost/network/traits/headers_container.hpp>
 #include <boost/utility/enable_if.hpp>
 
 /** message.hpp
@@ -30,7 +31,7 @@ struct basic_message {
  public:
   typedef Tag tag;
 
-  typedef typename headers_container<Tag>::type headers_container_type;
+  typedef std::multimap<std::string, std::string> headers_container_type;
   typedef typename headers_container_type::value_type header_type;
   typedef std::string string_type;
 

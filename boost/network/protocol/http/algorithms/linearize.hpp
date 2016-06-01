@@ -20,8 +20,6 @@
 #include <boost/network/protocol/http/message/wrappers/headers.hpp>
 #include <boost/network/protocol/http/message/wrappers/port.hpp>
 #include <boost/network/protocol/http/traits/connection_keepalive.hpp>
-#include <boost/network/traits/headers_container.hpp>
-#include <boost/network/traits/ostringstream.hpp>
 #include <boost/optional.hpp>
 #include <boost/range/algorithm/copy.hpp>
 #include <boost/version.hpp>
@@ -44,7 +42,7 @@ struct linearize_header {
 
   template <class ValueType>
   string_type operator()(ValueType& header) {
-    typedef typename ostringstream<Tag>::type output_stream;
+    typedef std::ostringstream output_stream;
     typedef constants<Tag> consts;
     output_stream header_line;
     header_line << name(header) << consts::colon() << consts::space()

@@ -26,8 +26,6 @@
 #include <boost/network/protocol/http/message/wrappers/uri.hpp>
 #include <boost/network/protocol/http/parser/incremental.hpp>
 #include <boost/network/protocol/http/traits/delegate_factory.hpp>
-#include <boost/network/traits/istream.hpp>
-#include <boost/network/traits/ostream_iterator.hpp>
 #include <boost/network/version.hpp>
 #include <boost/range/algorithm/transform.hpp>
 #include <boost/throw_exception.hpp>

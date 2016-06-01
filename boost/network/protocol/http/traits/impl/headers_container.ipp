@@ -9,7 +9,6 @@
 #define BOOST_NETWORK_PROTOCOL_HTTP_MESSAGE_TRAITS_HEADERS_CONTAINER_IPP
 
 #include <boost/algorithm/string/case_conv.hpp>
-#include <boost/network/traits/headers_container.hpp>
 #include <boost/utility/enable_if.hpp>
 #include <map>
 #include <string>

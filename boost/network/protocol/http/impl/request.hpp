@@ -17,6 +17,7 @@
   */
 
 #include <cstdint>
+#include <vector>
 #include <network/uri/uri.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/fusion/container/map.hpp>
@@ -29,7 +30,6 @@
 #include <boost/network/protocol/http/message/wrappers/body.hpp>
 #include <boost/network/protocol/http/message/wrappers/headers.hpp>
 #include <boost/network/support/is_async.hpp>
-#include <boost/network/traits/vector.hpp>
 
 namespace boost {
 namespace network {
